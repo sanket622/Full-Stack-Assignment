@@ -16,7 +16,10 @@ const app = express();
 
 app.use(helmet());
 app.use(cors({
-  origin: 'https://full-stack-assignment-b527.vercel.app' || 'http://localhost:3000',
+  origin: [
+    'https://full-stack-assignment-b527.vercel.app',
+    'http://localhost:3000'
+  ],
   credentials: true
 }));
 

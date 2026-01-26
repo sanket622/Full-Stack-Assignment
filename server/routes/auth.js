@@ -2,10 +2,10 @@ import express from 'express';
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
 import auth from '../middleware/auth.js';
+import redisClient from '../services/redisClient.js';
 
 const router = express.Router();
 
-// Register
 router.post('/register', async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -43,7 +43,7 @@ router.post('/register', async (req, res) => {
   }
 });
 
-// Login
+
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -79,15 +79,25 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// Get current user
 router.get('/me', auth, async (req, res) => {
-  res.json({
-    user: {
+  try {
+    const userId = req.user._id.toString();
+    const cacheKey = `user:${userId}`;
+    const cachedUser = await redisClient.get(cacheKey);
+    console.log('Cached User:', cachedUser);
+    if (cachedUser) {
+      return res.json({ user: JSON.parse(cachedUser) });
+    }
+    const userData = {
       id: req.user._id,
       name: req.user.name,
       email: req.user.email
-    }
-  });
+    };
+    await redisClient.set(cacheKey, JSON.stringify(userData), { EX: 3600 }); // cache for 1 hour
+    res.json({ user: userData });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
 });
 
 export default router;
