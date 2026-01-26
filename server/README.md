@@ -1,4 +1,3 @@
-
 # Deployed backend Link = https://full-stack-assignment-flame.vercel.app/api/health
 
 # Weather Dashboard - Multi-User Weather Application
@@ -92,6 +91,51 @@ The application features two AI-powered capabilities using OpenAI GPT-3.5-turbo:
 - Improves user experience for frequent travelers
 - Reduces cognitive load when managing multiple cities
 - Provides visual hierarchy in the dashboard
+
+## ⚡ Redis Caching Implementation
+
+This project uses Redis for caching user profile data to improve performance and reduce database load.
+
+### Why Redis?
+- Fast in-memory data store for frequently accessed data
+- Reduces MongoDB queries for user profile fetches
+- Scalable for production (supports Redis Cloud)
+
+### How It Works
+- When the `/api/auth/me` endpoint is called, the server first checks Redis for the user profile.
+- If found, it returns the cached profile.
+- If not found, it fetches from MongoDB, returns the result, and caches it in Redis for future requests.
+
+### Local Development Setup
+1. Install Redis on your machine (e.g., with Homebrew: `brew install redis`).
+2. Start Redis server locally: `redis-server`
+3. Ensure your `.env` contains the following (for local):
+   ```env
+   REDIS_HOST=127.0.0.1
+   REDIS_PORT=6379
+   REDIS_USERNAME= # (leave blank for local)
+   REDIS_PASSWORD= # (leave blank for local)
+   ```
+
+### Production Setup (e.g., Vercel)
+1. Create a Redis Cloud database (e.g., RedisLabs, Upstash).
+2. Add your Redis credentials to your `.env` and Vercel environment variables:
+   ```env
+   REDIS_HOST=your-redis-host
+   REDIS_PORT=your-redis-port
+   REDIS_USERNAME=your-redis-username
+   REDIS_PASSWORD=your-redis-password
+   ```
+3. The server will automatically use these credentials to connect to Redis Cloud in production.
+
+### Related Files
+- `services/redisClient.js` – Redis client setup and connection
+- `routes/auth.js` – Uses Redis to cache user profile in `/me` route
+
+### Example Usage
+- On login or app load, frontend calls `/api/auth/me` to fetch user profile
+- First call fetches from DB and caches in Redis
+- Subsequent calls return cached profile (until cache expires)
 
 ## 🛠️ Setup Instructions
 
