@@ -16,7 +16,7 @@ const app = express();
 
 app.use(helmet());
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' ? 'https://your-domain.com' : 'http://localhost:3000',
+  origin: process.env.NODE_ENV === 'production' ? 'https://full-stack-assignment-b527.vercel.app' : 'http://localhost:3000',
   credentials: true
 }));
 
