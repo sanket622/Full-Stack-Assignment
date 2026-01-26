@@ -16,7 +16,7 @@ const app = express();
 
 app.use(helmet());
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' ? 'https://full-stack-assignment-b527.vercel.app' : 'http://localhost:3000',
+  origin: 'https://full-stack-assignment-b527.vercel.app' || 'http://localhost:3000',
   credentials: true
 }));
 
@@ -49,7 +49,7 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ 
     message: 'Something went wrong!',
-    error: process.env.NODE_ENV === 'development' ? err.message : {}
+    error: err.message
   });
 });
 
