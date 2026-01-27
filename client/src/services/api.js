@@ -80,3 +80,27 @@ export const aiAPI = {
     return response.data;
   }
 };
+
+export const notificationsAPI = {
+  getNotifications: async () => {
+    const response = await api.get('/notifications');
+    return response.data;
+  },
+  
+  markAsRead: async (id) => {
+    const response = await api.patch(`/notifications/${id}/read`);
+    return response.data;
+  },
+  
+  getPreferences: async () => {
+    const response = await api.get('/notifications/preferences');
+    return response.data;
+  },
+  
+  updatePreferences: async (preferences) => {
+    const response = await api.put('/notifications/preferences', preferences);
+    return response.data;
+  }
+};
+
+export default api;

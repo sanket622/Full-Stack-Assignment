@@ -8,10 +8,13 @@ A modern React-based weather dashboard application with AI-powered insights and 
 - **User Authentication**: Secure login and registration system
 - **City Management**: Add, remove, and favorite cities
 - **Real-time Weather**: Current weather data for tracked cities
+- **Smart Weather Alerts**: Proactive notifications with customizable thresholds for temperature, humidity, and wind conditions
 - **AI Insights**: Get AI-powered weather insights for each city
 - **Travel Recommendations**: AI-generated travel tips based on your cities
 
 ### User Experience
+- **Smart Notifications**: Notification bell with unread count and contextual weather alerts
+- **Alert Settings**: Customizable weather thresholds through an intuitive settings modal
 - **Shimmer Loading UI**: Elegant loading states with shimmer effects while data loads
 - **Responsive Design**: Optimized for desktop and mobile devices
 - **Favorite Cities**: Star cities for quick access

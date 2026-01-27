@@ -9,6 +9,8 @@ import authRoutes from './routes/auth.js';
 import cityRoutes from './routes/cities.js';
 import weatherRoutes from './routes/weather.js';
 import aiRoutes from './routes/ai.js';
+import notificationRoutes from './routes/notifications.js';
+import { startAlertScheduler } from './services/alertService.js';
 
 dotenv.config();
 
@@ -42,6 +44,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/cities', cityRoutes);
 app.use('/api/weather', weatherRoutes);
 app.use('/api/ai', aiRoutes);
+app.use('/api/notifications', notificationRoutes);
 
 
 app.get('/api/health', (req, res) => {
@@ -63,4 +66,7 @@ app.use('*', (req, res) => {
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+  
+  // Start alert scheduler
+  startAlertScheduler();
 });

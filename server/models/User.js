@@ -26,6 +26,25 @@ const userSchema = new mongoose.Schema({
     lon: Number,
     isFavorite: { type: Boolean, default: false },
     addedAt: { type: Date, default: Date.now }
+  }],
+  alertPreferences: {
+    enabled: { type: Boolean, default: true },
+    tempMin: { type: Number, default: 0 },
+    tempMax: { type: Number, default: 35 },
+    humidityThreshold: { type: Number, default: 80 },
+    windThreshold: { type: Number, default: 50 },
+    notifications: {
+      inApp: { type: Boolean, default: true },
+      email: { type: Boolean, default: false }
+    }
+  },
+  notifications: [{
+    type: { type: String, enum: ['weather', 'alert'] },
+    title: String,
+    message: String,
+    city: String,
+    read: { type: Boolean, default: false },
+    createdAt: { type: Date, default: Date.now }
   }]
 }, {
   timestamps: true

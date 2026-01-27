@@ -74,7 +74,12 @@ router.delete('/:cityId', auth, async (req, res) => {
       return res.status(404).json({ message: 'City not found' });
     }
     
+    const cityName = city.name;
     user.cities.pull(req.params.cityId);
+    
+    // Remove notifications for this city
+    user.notifications = user.notifications.filter(notif => notif.city !== cityName);
+    
     await user.save();
 
     res.json({ message: 'City removed' });

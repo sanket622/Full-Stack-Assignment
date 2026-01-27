@@ -5,6 +5,8 @@ import { logout } from '../store/authSlice';
 import WeatherCard from '../components/WeatherCard';
 import AddCityModal from '../components/AddCityModal';
 import ShimmerCard from '../components/ShimmerCard';
+import NotificationBell from '../components/NotificationBell';
+import AlertSettings from '../components/AlertSettings';
 import { aiAPI } from '../services/api';
 
 const Dashboard = () => {
@@ -12,6 +14,7 @@ const Dashboard = () => {
   const { user } = useAppSelector((state) => state.auth);
   const { cities, isLoading } = useAppSelector((state) => state.cities);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isAlertSettingsOpen, setIsAlertSettingsOpen] = useState(false);
   const [travelRecommendations, setTravelRecommendations] = useState('');
   const [showRecommendations, setShowRecommendations] = useState(false);
 
@@ -50,7 +53,14 @@ const Dashboard = () => {
               <h1 className="text-3xl font-bold text-gray-900">Weather Dashboard</h1>
               <p className="text-gray-600">Welcome back, {user?.name}!</p>
             </div>
-            <div className="flex space-x-4">
+            <div className="flex items-center space-x-4">
+              <NotificationBell />
+              <button
+                onClick={() => setIsAlertSettingsOpen(true)}
+                className="bg-orange-600 text-white px-4 py-2 rounded-md hover:bg-orange-700"
+              >
+                Alert Settings
+              </button>
               <button
                 onClick={() => setIsAddModalOpen(true)}
                 className="bg-primary-600 text-white px-4 py-2 rounded-md hover:bg-primary-700"
@@ -155,6 +165,11 @@ const Dashboard = () => {
       <AddCityModal
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
+      />
+      
+      <AlertSettings
+        isOpen={isAlertSettingsOpen}
+        onClose={() => setIsAlertSettingsOpen(false)}
       />
     </div>
   );

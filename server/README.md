@@ -77,20 +77,28 @@ The application features two AI-powered capabilities using OpenAI GPT-3.5-turbo:
 - **Practical**: Focuses on actionable recommendations
 - **User-centric**: Tailored to the user's specific cities and preferences
 
-## ✨ Creative Feature: Smart City Favorites
+## ✨ Creative Feature: Smart Weather Alerts & Notifications System
 
-**Problem Solved:** Users often have many cities but want quick access to the most important ones.
+**Problem Solved:** Users need proactive weather warnings to stay safe and plan their day effectively.
 
 **Solution:** 
-- One-click favorite system with visual distinction (⭐)
-- Favorites appear in a separate section at the top
-- Persistent across sessions
-- Quick toggle functionality
+- **Real-time Monitoring**: Automated weather checks every 30 minutes using cron jobs
+- **Customizable Thresholds**: Users set personal temperature, humidity, and wind speed limits
+- **Smart Notifications**: Contextual alerts with actionable advice ("Dress warmly!", "Take an umbrella!")
+- **Notification Management**: In-app notification bell with unread count and read status
+- **Duplicate Prevention**: Avoids sending same alert multiple times within 2 hours
+- **City-based Cleanup**: Automatically removes notifications when cities are deleted
 
 **Why This Feature:**
-- Improves user experience for frequent travelers
-- Reduces cognitive load when managing multiple cities
-- Provides visual hierarchy in the dashboard
+- Enhances user safety with proactive weather warnings
+- Provides personalized experience through customizable thresholds
+- Demonstrates real-time data processing and scheduled task management
+- Shows advanced notification system design with proper state management
+
+**Technical Implementation:**
+- Backend: Node-cron scheduler, MongoDB notifications storage, duplicate prevention logic
+- Frontend: Redux state management, notification bell component, alert settings modal
+- API: RESTful endpoints for preferences and notification management
 
 ## ⚡ Redis Caching Implementation
 
