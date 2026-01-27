@@ -1,5 +1,7 @@
 # Weather Dashboard Client
 
+# Deployed Frontend Url = https://full-stack-assignment-b527.vercel.app/
+
 A modern React-based weather dashboard application with AI-powered insights and travel recommendations.
 
 ## Features
