@@ -61,7 +61,7 @@ const AddCityModal = ({ isOpen, onClose }) => {
               placeholder="Search for a city..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+              onKeyUp={(e) => e.key === 'Enter' && handleSearch()}
               className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
             />
             <button
