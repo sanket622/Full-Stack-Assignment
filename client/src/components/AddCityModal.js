@@ -10,8 +10,10 @@ const AddCityModal = ({ isOpen, onClose }) => {
   const dispatch = useAppDispatch();
 
   const handleSearch = async () => {
-    if (!query.trim()) return;
-
+    if (!query.trim()) {
+      setSearchResults([]);
+        return;
+    }
     try {
       setLoading(true);
       const results = await weatherAPI.searchCities(query);
